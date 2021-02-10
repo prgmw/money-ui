@@ -1,0 +1,34 @@
+<div class="p-grid">
+    <div class="p-col-12">
+      <p-table [responsive] = true [paginator]="true" [rows]="5" [showCurrentPageReport]="true" currentPageReportTemplate="Inicial {first} Final {last} de {totalRecords}" [rowsPerPageOptions]="[2,5,10]" [value]="pessoas">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Nome</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-pessoa>
+            <tr>
+                <td>{{pessoa.nome}}</td>
+                <td>{{pessoa.cidade}}</td>
+                <td> {{pessoa.estado}}</td>
+                <td>
+                  <span>{{pessoa.status === 'false' ? 'Inativo' : 'Ativo'}}</span>
+                </td>
+                <td>
+                   <a style="margin-right: 5px" pTooltip="Editar" tooltipPosition="top" pButton icon="fa fa-pencil"></a>
+                   <button pButton pTooltip="Remover" tooltipPosition="top" icon="fa fa-trash"></button>
+                </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      <br>
+      <div class="p-col-12">
+        <button pButton type="submit" label="Nova Pessoa"> </button>
+      </div>
+     </div>
+   </div>

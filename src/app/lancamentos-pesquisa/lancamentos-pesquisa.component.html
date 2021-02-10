@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="p-grid">
+
+    <div class="p-col-12">
+      <h1>Lançamentos</h1>
+    </div>
+
+    <div class="p-col-12">
+      <label for="inputDescricao">Descrição</label>
+      <input id="inputDescricao" pInputText type="text" style="width: 95%">
+    </div>
+
+    <br>
+
+    <div class="p-col-12">
+      <label style="display: block" for="inputVencimento">Vencimento</label>
+      <input id="inputVencimento" pInputText type="text" style="width: 95px; margin-right: 5px">
+
+      <label for="inputAte">Até</label>
+      <input id="inputAte" type="text" pInputText>
+    </div>
+
+    <br>
+
+    <div class="p-col-12">
+      <button pButton type="submit" label="Pesquisar"> </button>
+    </div>
+
+  </div>
+
+  <div class="p-col-12">
+      <app-lancamento-grid [lancamentos]="lancamentos"></app-lancamento-grid>
+  </div>
+
+  <div class="p-col-12">
+      <button pButton label="Novo Lançamento"> </button>
+  </div>
+
+</div>

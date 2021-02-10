@@ -1,0 +1,49 @@
+.navbar {
+  padding: 10px 0px;
+  background-color: blue;
+}
+
+.navbar-toogle {
+  color: aliceblue;
+}
+
+.navbar-menu {
+  background-color: #3a3633;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 210px;
+  margin: 0;
+  padding: 0;
+  z-index: 9999;
+  list-style: none;
+}
+
+.navbar-usuario {
+  color: aliceblue;
+
+  font-weight: bold;
+  text-transform: uppercase;
+
+  padding: 15px;
+  margin-bottom: 15px;
+  border-bottom: #525151;
+}
+
+.navbar-item {
+  color: aliceblue;
+  padding: 15px;
+
+}
+
+.navbar-item a {
+  color: #c0bbb7;
+  text-decoration: none;
+
+}
+
+.navbar-item a:hover {
+  color: #ffffff;
+}
