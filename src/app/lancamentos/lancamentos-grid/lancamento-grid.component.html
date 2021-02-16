@@ -1,6 +1,6 @@
 <div class="p-grid">
     <div class="p-col-12">
-      <p-table [responsive] = true [paginator]="true" [rows]="5" [showCurrentPageReport]="true" currentPageReportTemplate="Inicial {first} Final {last} de {totalRecords}" [rowsPerPageOptions]="[2,5,10]" [value]="lancamentos">
+      <p-table [responsive] = true [paginator]="true" [rows]="5" [showCurrentPageReport]="true" currentPageReportTemplate="Inicial {first} Final {last} de {totalRecords}" [rowsPerPageOptions]="[2,5,10]" [value]="lancamentos.content">
           <ng-template pTemplate="header">
             <tr>
                 <th>Tipo</th>

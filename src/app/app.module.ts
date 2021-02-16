@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
+
 import { CoreModule } from './core/core.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { NgModule } from '@angular/core';
@@ -11,6 +13,7 @@ import { PessoasModule } from './pessoas/pessoas.module';
     AppComponent
   ],
   imports: [
+    HttpClientModule,
     LancamentosModule,
     PessoasModule,
     CoreModule
