@@ -12,7 +12,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 
 export class LancamentosPesquisaComponent {
+
   lancamentos : any = [];
+  descricao: string;
+  dataVencimentoInicio: Date;
+  dataVencimentoFim: Date;
 
   constructor(private service: LancamentoService) {}
 
@@ -21,8 +25,14 @@ export class LancamentosPesquisaComponent {
   }
 
   pesquisar()  {
-    debugger
-      this.service.pesquisar()
+
+    const filtro = {
+      descricao: this.descricao,
+      dataVencimentoInicio: this.dataVencimentoInicio,
+      dataVencimentoFim: this.dataVencimentoFim
+    }
+
+      this.service.pesquisar(filtro)
         .subscribe((res: {}) => {
           this.lancamentos = res;
           console.log(this.lancamentos)

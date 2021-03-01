@@ -1,23 +1,27 @@
 <div class="container">
   <div class="p-grid">
 
+  <form autocomplete="off" (ngSubmit) = "pesquisar()">
+
     <div class="p-col-12">
       <h1>Lançamentos</h1>
     </div>
 
     <div class="p-col-12">
       <label for="inputDescricao">Descrição</label>
-      <input id="inputDescricao" pInputText type="text" style="width: 95%">
+      <input id="inputDescricao" name="descricao"
+        [(ngModel)]="descricao" pInputText type="text" style="width: 95%">
     </div>
 
     <br>
 
     <div class="p-col-12">
       <label style="display: block" for="inputVencimento">Vencimento</label>
-      <input id="inputVencimento" pInputText type="text" style="width: 95px; margin-right: 5px">
+      <p-calendar name="vencimentoInicio" [(ngModel)] = "dataVencimentoInicio" dateFormat='dd/mm/yy' [inputStyle] = "{ width: '95px' }"><</p-calendar>
+
 
       <label for="inputAte">Até</label>
-      <input id="inputAte" type="text" pInputText>
+      <p-calendar name="vencimentoFim" [(ngModel)] = "dataVencimentoFim" dateFormat='dd/mm/yy' [inputStyle] = "{ width: '95px' }"><</p-calendar>
     </div>
 
     <br>
@@ -25,6 +29,8 @@
     <div class="p-col-12">
       <button pButton type="submit" label="Pesquisar"> </button>
     </div>
+
+  </form>
 
   </div>
 

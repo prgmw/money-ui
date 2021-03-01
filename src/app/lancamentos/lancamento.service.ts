@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { retry, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import * as moment from 'moment';
 
 
 export class Content {
@@ -28,6 +29,11 @@ export class Lancamento {
   pessoa: string;
 }
 
+export interface FiltroPesquisa {
+   descricao: string,
+   dataVencimentoInicio: Date;
+   dataVencimentoFim: Date;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -38,16 +44,34 @@ export class LancamentoService {
 
   constructor(private httpClient: HttpClient) { }
 
-  httpHeader = {
-    headers: new HttpHeaders({
+  getHeaders() {
+    return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Basic cGF1bG9AYWxnYS5jb20uYnI6cGF1bG8='
     })
   }
 
+  pesquisar(filtro : FiltroPesquisa): Observable<Content> {
 
-  pesquisar(): Observable<Content> {
-    return this.httpClient.get<Content>(`${this.lancamentosUrl}?resumo`, this.httpHeader)
+    let params = new HttpParams();
+    let headers = new HttpHeaders();
+
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Basic cGF1bG9AYWxnYS5jb20uYnI6cGF1bG8=')
+
+    if (filtro.descricao) {
+       params = params.append('descricao', filtro.descricao);
+    }
+
+    if (filtro.dataVencimentoInicio) {
+      params = params.append('dataVencimentoInicio', moment(filtro.dataVencimentoInicio).format('DD-MM-YYYY'));
+    }
+
+    if (filtro.descricao) {
+      params = params.append('dataVencimentoFim', moment(filtro.dataVencimentoFim).format('DD-MM-YYYY'));
+    }
+
+    return this.httpClient.get<Content>(`${this.lancamentosUrl}`, { headers , params})
       .pipe(
          retry(1),
          catchError(this.processError)
