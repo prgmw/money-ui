@@ -35,6 +35,11 @@ export interface FiltroPesquisa {
    dataVencimentoFim: Date;
 }
 
+export interface Paginacao {
+  page: string,
+  size: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -51,13 +56,21 @@ export class LancamentoService {
     })
   }
 
-  pesquisar(filtro : FiltroPesquisa): Observable<Content> {
+  pesquisar(filtro : FiltroPesquisa, paginacao: Paginacao): Observable<Content> {
 
     let params = new HttpParams();
     let headers = new HttpHeaders();
 
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Basic cGF1bG9AYWxnYS5jb20uYnI6cGF1bG8=')
+
+    if (paginacao.page) {
+      params = params.append('page', paginacao.page);
+    }
+
+    if (paginacao.size) {
+      params = params.append('size', paginacao.size);
+    }
 
     if (filtro.descricao) {
        params = params.append('descricao', filtro.descricao);

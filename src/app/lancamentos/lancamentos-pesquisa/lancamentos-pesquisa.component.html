@@ -35,7 +35,7 @@
   </div>
 
   <div class="p-col-12">
-      <app-lancamento-grid [lancamentos]="lancamentos"></app-lancamento-grid>
+      <app-lancamento-grid (pesquisarPaginacao)="pesquisarPaginacao($event)" [lancamentos]="lancamentos"></app-lancamento-grid>
   </div>
 
   <div class="p-col-12">

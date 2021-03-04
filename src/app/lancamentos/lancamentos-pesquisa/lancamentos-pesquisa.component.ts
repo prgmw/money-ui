@@ -1,4 +1,4 @@
-import { LancamentoService } from './../lancamento.service';
+import { LancamentoService, Paginacao } from './../lancamento.service';
 import { Component } from '@angular/core';
 
 import { retry, catchError } from 'rxjs/operators';
@@ -17,11 +17,20 @@ export class LancamentosPesquisaComponent {
   descricao: string;
   dataVencimentoInicio: Date;
   dataVencimentoFim: Date;
+  page: string;
+  size: string;
 
   constructor(private service: LancamentoService) {}
 
   ngOnInit() {
-    this.pesquisar();
+    this.pesquisar()
+  }
+
+  pesquisarPaginacao(paginacao : any) {
+    this.page = paginacao.page;
+    this.size = paginacao.size;
+
+    this.pesquisar()
   }
 
   pesquisar()  {
@@ -32,10 +41,14 @@ export class LancamentosPesquisaComponent {
       dataVencimentoFim: this.dataVencimentoFim
     }
 
-      this.service.pesquisar(filtro)
-        .subscribe((res: {}) => {
-          this.lancamentos = res;
-          console.log(this.lancamentos)
-        })
+    const paginacao = {
+      page : this.page ? this.page : "0",
+      size: this.size ? this.size : "5"
+    };
+
+    this.service.pesquisar(filtro, paginacao)
+      .subscribe((res: {}) => {
+        this.lancamentos = res;
+      })
   }
 }
