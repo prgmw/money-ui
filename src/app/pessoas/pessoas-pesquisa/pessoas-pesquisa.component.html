@@ -20,6 +20,6 @@
 
   <br><br>
     <div class="p-col-12">
-      <app-pessoas-grid [pessoas]="pessoas"> </app-pessoas-grid>
+      <app-pessoas-grid (pesquisarPaginacao)="pesquisarPaginacao($event)" [pessoas]="pessoas"> </app-pessoas-grid>
     </div>
 </div>

@@ -1,7 +1,8 @@
+import { ComumService } from '../shared/comum.service';
 import { Injectable } from '@angular/core';
 
 import { retry, catchError } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import * as moment from 'moment';
 
@@ -43,18 +44,13 @@ export interface Paginacao {
 @Injectable({
   providedIn: 'root'
 })
-export class LancamentoService {
+export class LancamentoService extends ComumService {
 
   lancamentosUrl = 'http://localhost:8080/lancamentos';
 
-  constructor(private httpClient: HttpClient) { }
-
-  getHeaders() {
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Basic cGF1bG9AYWxnYS5jb20uYnI6cGF1bG8='
-    })
-  }
+  constructor(private httpClient: HttpClient) {
+    super();
+   }
 
   pesquisar(filtro : FiltroPesquisa, paginacao: Paginacao): Observable<Content> {
 
@@ -89,16 +85,6 @@ export class LancamentoService {
          retry(1),
          catchError(this.processError)
       )
-  }
+   }
 
-  processError(err: any) {
-    let message = '';
-    if(err.error instanceof ErrorEvent) {
-     message = err.error.message;
-    } else {
-     message = `Error Code: ${err.status}\nMessage: ${err.message}`;
-    }
-    console.log(message);
-    return throwError(message);
- }
 }

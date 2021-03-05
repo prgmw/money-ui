@@ -1,6 +1,15 @@
 <div class="p-grid">
     <div class="p-col-12">
-      <p-table [responsive] = true [paginator]="true" [rows]="5" [showCurrentPageReport]="true" currentPageReportTemplate="Inicial {first} Final {last} de {totalRecords}" [rowsPerPageOptions]="[2,5,10]" [value]="pessoas">
+      <p-table
+          [value]="pessoas.content"
+          [lazy]="true"
+          (onLazyLoad)="carregar($event)"
+          [paginator]="true"
+          [rows]="pessoas.size"
+          [totalRecords]="pessoas.totalElements"
+          [responsive] = true
+          [showCurrentPageReport]="true">
+
           <ng-template pTemplate="header">
             <tr>
                 <th>Nome</th>
@@ -13,8 +22,8 @@
           <ng-template pTemplate="body" let-pessoa>
             <tr>
                 <td>{{pessoa.nome}}</td>
-                <td>{{pessoa.cidade}}</td>
-                <td> {{pessoa.estado}}</td>
+                <td>{{pessoa.endereco.cidade}}</td>
+                <td> {{pessoa.endereco.estado}}</td>
                 <td>
                   <span>{{pessoa.status === 'false' ? 'Inativo' : 'Ativo'}}</span>
                 </td>
